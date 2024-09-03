@@ -1,9 +1,18 @@
-const countVotes = (/*recibe*/) => {
-    //Code
+const countVotes = (votes) => {
+    let result = [];
+
+    votes.forEach(vote => {
+        result[vote.candidate] = (result[vote.candidate] || 0) + 1;
+    })
+
+    return result;
 }
 
-const showResults = (/*recibe*/) => {
-    //Code
+const showResults = (voteCount) => {
+    alert("Resultados de la votación -> \n");
+    for (let candidate in voteCount) {
+        alert(`${candidate}: ${voteCount[candidate]} votos`);
+    }
 }
 
 const main = () => {
@@ -14,7 +23,10 @@ const main = () => {
         { candidate: 'Alice' },
         { candidate: 'Bob' }
     ];
-    //Code
+
+    const result = countVotes(votes);
+
+    showResults(result);
 
 }
 
