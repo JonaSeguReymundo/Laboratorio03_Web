@@ -1,39 +1,39 @@
-const fibonacciCalculate = (num) => {
-    /*const fibonacciSequence = [0, 1]; // Iniciamos la secuencia con 0 y 1
-    for (let i = 2; i < num; i++) {
-        fibonacciSequence.push(fibonacciSequence[i - 1] + fibonacciSequence[i - 2]);
-    }
-    return fibonacciSequence.slice(0, n);*/
+const fibonacciCalculate = (quantity) => {
+    // Se crea la secuencia de Fibonacci con los primeros dos números.
+    const sequence = [];
+    // Se inicializan los primeros dos números de la secuencia.
+    if (quantity >= 1) sequence.push(0);
+    if (quantity >= 2) sequence.push(1);
 
-    let a = 0,
-        b = 1,
-        result = "0"; // Inicializamos los primeros números y el resultado
-    for (let i = 1; i < num; i++) {
-        result += `, ${b}`; // Acumular el siguiente número en la cadena
-        [a, b] = [b, a + b]; // Actualizar los valores de a y b
+    // Se generan los demás números de la secuencia. Se utiliza la fórmula de la secuencia de Fibonacci. 1er y 2do número: 0, 1. El resto: suma de los dos anteriores.
+    for (let i = 2; i < quantity; i++) {
+        sequence.push(sequence[i - 1] + sequence[i - 2]);
     }
-    return result; // Devolver la secuencia en formato de cadena
+
+    // Retorna la secuencia de Fibonacci.
+    return sequence;
 }
 
 const requestQuantity = () => {
     let quantity;
     do {
-        quantity = prompt("¿Cuántos números de la secuencia de Fibonacci deseas generar?"); // Se le pide el número.
-        if (quantity === null) continue;
-        quantity = parseInt(quantity); // Se convierte a entero.
-    } while (isNaN(quantity) || quantity <= 0); // Condición que no sea nulo o menor que cero.
+        quantity = parseInt(prompt("¿Cuántos números de la secuencia de Fibonacci deseas generar?")); // Se le pide la secuencia de número, se guarda en una variable y se convierte a entero.
+    } while (isNaN(quantity) || quantity < 0); // Condición que la cantidad no sea nula o menor a cero.
+    // Retorna la secuencia del número.
     return quantity;
 }
 
 const main = () => {
+    // Pedir al usuario la cantidad de números de la secuencia de Fibonacci.
     const quantity = requestQuantity();
 
-    // Si la cantidad es válida, generar la secuencia de Fibonacci
-    if (quantity > 0) {
-        const fibonacciSequence = fibonacciCalculate(quantity);
-        alert(`Los primeros ${quantity} números de Fibonacci son: ${fibonacciSequence.join(', ')}`);
-    } else {
+    // Si la cantidad es 0, no se generan números de Fibonacci.
+    if (quantity === 0) {
         alert("No se generaron números de Fibonacci.");
+    } else {
+        // Generar la secuencia de Fibonacci y mostrarla al usuario.
+        const fibonacciSequence = fibonacciCalculate(quantity);
+        alert(`Los primeros ${quantity} números de Fibonacci son: ${fibonacciSequence.join(", ")}`);
     }
 
 }
